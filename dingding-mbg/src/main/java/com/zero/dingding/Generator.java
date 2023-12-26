@@ -1,4 +1,4 @@
-package com.zero.dingdingmbg;
+package com.zero.dingding;
 
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.Configuration;

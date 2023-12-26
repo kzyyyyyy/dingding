@@ -1,4 +1,4 @@
-package com.zero.dingdingmbg;
+package com.zero.dingding;
 
 import org.mybatis.generator.api.IntrospectedColumn;
 import org.mybatis.generator.api.IntrospectedTable;
