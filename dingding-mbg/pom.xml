@@ -6,19 +6,8 @@
     <groupId>com.zero</groupId>
     <artifactId>dingding-mbg</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>16</source>
-                    <target>16</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
     <packaging>jar</packaging>
+
     <name>dingding-mbg</name>
     <description>dingding-mbg</description>
 
@@ -29,10 +18,10 @@
     </parent>
 
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.macro.mall</groupId>-->
-<!--            <artifactId>mall-common</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.zero</groupId>
+            <artifactId>dingding-common</artifactId>
+        </dependency>
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper-spring-boot-starter</artifactId>
@@ -51,5 +40,16 @@
         </dependency>
     </dependencies>
 
-
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>io.fabric8</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>
