@@ -1,4 +1,4 @@
-package com.zero.dingdingcommon.domain;
+package com.zero.dingding.common.domain;
 
 import lombok.Builder;
 import lombok.Data;

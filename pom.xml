@@ -21,6 +21,8 @@
         <module>dingding-mbg</module>
         <module>dinging-admin</module>
         <module>dingding-common</module>
+        <module>dingding-portal</module>
+        <module>dingding-security</module>
     </modules>
 
     <properties>
@@ -49,7 +51,7 @@
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <dingding-common.version>0.0.1-SNAPSHOT</dingding-common.version>
         <dingding.mbg.version>0.0.1-SNAPSHOT</dingding.mbg.version>
-        <!--        <mall-security.version>1.0-SNAPSHOT</mall-security.version>-->
+        <dingding-security.version>0.0.1-SNAPSHOT</dingding-security.version>
     </properties>
 
     <dependencies>
@@ -102,11 +104,11 @@
                 <version>${dingding.mbg.version}</version>
             </dependency>
             <!--mall安全模块-->
-            <!--            <dependency>-->
-            <!--                <groupId>com.macro.mall</groupId>-->
-            <!--                <artifactId>mall-security</artifactId>-->
-            <!--                <version>${mall-security.version}</version>-->
-            <!--            </dependency>-->
+            <dependency>
+                <groupId>com.zero</groupId>
+                <artifactId>dingding-security</artifactId>
+                <version>${dingding-security.version}</version>
+            </dependency>
             <!--MyBatis分页插件starter-->
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
@@ -148,6 +150,7 @@
                 <artifactId>swagger-annotations</artifactId>
                 <version>${swagger-annotations.version}</version>
             </dependency>
+
             <!-- MyBatis 生成器 -->
             <dependency>
                 <groupId>org.mybatis.generator</groupId>
@@ -200,20 +203,73 @@
     </dependencyManagement>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>16</source>
-                    <target>16</target>
-                </configuration>
-            </plugin>
-        </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+                <plugin>
+                    <groupId>io.fabric8</groupId>
+                    <artifactId>docker-maven-plugin</artifactId>
+                    <version>${docker.maven.plugin.version}</version>
+                    <executions>
+                        <!--如果想在项目打包时构建镜像添加-->
+                        <execution>
+                            <id>build-image</id>
+                            <phase>package</phase>
+                            <goals>
+                                <goal>build</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <!-- Docker 远程管理地址-->
+                        <dockerHost>${docker.host}</dockerHost>
+                        <images>
+                            <image>
+                                <!--定义镜像名称-->
+                                <name>mall/${project.name}:${project.version}</name>
+                                <!--定义镜像构建行为-->
+                                <build>
+                                    <!--定义基础镜像-->
+                                    <from>openjdk:8</from>
+                                    <args>
+                                        <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+                                    </args>
+                                    <!--定义哪些文件拷贝到容器中-->
+                                    <assembly>
+                                        <!--定义拷贝到容器的目录-->
+                                        <targetDir>/</targetDir>
+                                        <!--只拷贝生成的jar包-->
+                                        <descriptorRef>artifact</descriptorRef>
+                                    </assembly>
+                                    <!--定义容器启动命令-->
+                                    <entryPoint>["java", "-jar","-Dspring.profiles.active=prod","/${project.build.finalName}.jar"]</entryPoint>
+                                    <!--定义维护者-->
+                                    <maintainer>macrozheng</maintainer>
+                                </build>
+                            </image>
+                        </images>
+                    </configuration>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
     </build>
+
+    <!--使用aliyun的Maven镜像源提升下载速度-->
+    <repositories>
+        <repository>
+            <id>aliyunmaven</id>
+            <name>aliyun</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+        </repository>
+        <repository>
+            <id>central2</id>
+            <name>central2</name>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+    </repositories>
 
 </project>

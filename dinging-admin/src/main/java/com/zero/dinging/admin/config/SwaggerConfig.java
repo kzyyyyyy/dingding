@@ -1,7 +1,7 @@
-package com.zero.dingingadmin.config;
+package com.zero.dinging.admin.config;
 
-import com.zero.dingdingcommon.config.BaseSwaggerConfig;
-import com.zero.dingdingcommon.domain.SwaggerProperties;
+import com.zero.dingding.common.config.BaseSwaggerConfig;
+import com.zero.dingding.common.domain.SwaggerProperties;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,10 +18,10 @@ public class SwaggerConfig extends BaseSwaggerConfig {
     @Override
     public SwaggerProperties swaggerProperties() {
         return SwaggerProperties.builder()
-                .apiBasePackage("com.zero.dingding.controller")
-                .title("mall后台系统")
-                .description("mall后台相关接口文档")
-                .contactName("macro")
+                .apiBasePackage("com.zero.dinging.admin.controller")
+                .title("dingding后台系统")
+                .description("dingding后台相关接口文档")
+                .contactName("zero")
                 .version("1.0")
                 .enableSecurity(true)
                 .build();

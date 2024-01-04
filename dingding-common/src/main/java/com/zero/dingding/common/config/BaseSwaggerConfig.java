@@ -1,6 +1,6 @@
-package com.zero.dingdingcommon.config;
+package com.zero.dingding.common.config;
 
-import com.zero.dingdingcommon.domain.SwaggerProperties;
+import com.zero.dingding.common.domain.SwaggerProperties;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
