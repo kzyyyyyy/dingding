@@ -1,7 +1,7 @@
-package com.zero.dinging.admin.controller;
+package com.zero.dingding.controller;
 
 import com.zero.dingding.common.api.CommonResult;
-import com.zero.dinging.admin.service.UmsMemberService;
+import com.zero.dingding.service.UmsMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.tags.Tag;

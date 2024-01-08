@@ -1,4 +1,4 @@
-package com.zero.dinging.admin.service;
+package com.zero.dingding.service;
 
 import com.zero.dingding.common.api.CommonResult;
 

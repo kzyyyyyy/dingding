@@ -1,4 +1,4 @@
-package com.zero.dinging.admin.config;
+package com.zero.dingding.config;
 
 import com.zero.dingding.common.config.BaseSwaggerConfig;
 import com.zero.dingding.common.domain.SwaggerProperties;
@@ -18,7 +18,7 @@ public class SwaggerConfig extends BaseSwaggerConfig {
     @Override
     public SwaggerProperties swaggerProperties() {
         return SwaggerProperties.builder()
-                .apiBasePackage("com.zero.dinging.admin.controller")
+                .apiBasePackage("com.zero.dingding.controller")
                 .title("dingding后台系统")
                 .description("dingding后台相关接口文档")
                 .contactName("zero")

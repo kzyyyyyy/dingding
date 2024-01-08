@@ -1,9 +1,9 @@
-package com.zero.dinging.admin.service.impl;
+package com.zero.dingding.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.zero.dingding.common.api.CommonResult;
 import com.zero.dingding.common.service.RedisService;
-import com.zero.dinging.admin.service.UmsMemberService;
+import com.zero.dingding.service.UmsMemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,9 +15,9 @@ public class UmsMemberServiceImpl implements UmsMemberService {
 
     @Autowired
     private RedisService redisService;
-    @Value("${redis.key.prefix.authCode}")
+    @Value("${redis.key.authCode}")
     private String REDIS_KEY_PREFIX_AUTH_CODE;
-    @Value("${redis.key.expire.authCode}")
+    @Value("${redis.expire.authCode}")
     private Long AUTH_CODE_EXPIRE_SECONDS;
 
     @Override
@@ -45,6 +45,7 @@ public class UmsMemberServiceImpl implements UmsMemberService {
         String realAuthCode = (String) redisService.get(REDIS_KEY_PREFIX_AUTH_CODE + telephone);
 
         if (authCode.equals(realAuthCode)){
+            redisService.del(REDIS_KEY_PREFIX_AUTH_CODE + telephone);
             return CommonResult.success(null, "验证码校验成功");
         }else {
             return CommonResult.failed("验证码不正确");

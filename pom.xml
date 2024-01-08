@@ -19,10 +19,11 @@
 
     <modules>
         <module>dingding-mbg</module>
+        <module>dingding-security</module>
         <module>dinging-admin</module>
         <module>dingding-common</module>
         <module>dingding-portal</module>
-        <module>dingding-security</module>
+
     </modules>
 
     <properties>

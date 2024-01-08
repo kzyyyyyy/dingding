@@ -1,4 +1,4 @@
-package com.zero.dinging.admin.config;
+package com.zero.dingding.config;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;
