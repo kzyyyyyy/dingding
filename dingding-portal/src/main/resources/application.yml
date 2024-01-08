@@ -1,0 +1,11 @@
+# ???redis key
+redis:
+  database: mall
+  key:
+    prefix:
+      authCode: 'ums:authCode'
+    orderId: 'oms:orderId'
+    member: 'ums:member'
+  expire:
+    authCode: 90 # ???????
+    common: 86400 # 24??
