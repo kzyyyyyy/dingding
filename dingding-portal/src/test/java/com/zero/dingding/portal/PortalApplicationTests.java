@@ -1,4 +1,4 @@
-package com.zero.portal;
+package com.zero.dingding.portal;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

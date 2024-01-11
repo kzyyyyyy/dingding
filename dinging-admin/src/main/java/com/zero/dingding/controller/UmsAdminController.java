@@ -10,10 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
 
 @Controller
 @Api(tags = "UmsAdminController", description = "后台用户管理")
@@ -39,5 +42,20 @@ public class UmsAdminController {
             return CommonResult.failed();
         }
         return CommonResult.success(register);
+    }
+    @ApiOperation(value = "登录以后返回token")
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public CommonResult login(@Validated @RequestBody UmsAdminParam umsAdminParam){
+        String token = umsAdminService.login(umsAdminParam.getUsername(), umsAdminParam.getPassword());
+
+        if (token == null){
+            return CommonResult.validateFailed("用户名或密码错误");
+        }
+
+        HashMap<String, String> tokenMap = new HashMap<>();
+        tokenMap.put("token",token);
+        tokenMap.put("tokenHead",tokenHead);
+        return CommonResult.success(tokenMap);
     }
 }
