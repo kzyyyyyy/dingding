@@ -30,7 +30,7 @@ logging:
     path: /var/logs
   level:
     root: info
-    com.macro.mall: info
+    com.zero.dingding: info
 
 logstash:
   host: logstash
